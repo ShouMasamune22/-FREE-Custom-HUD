@@ -1,0 +1,269 @@
+html, body {
+    background: transparent;
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+}
+
+#hud {
+    position: fixed;
+    inset: 0;
+    opacity: 1;
+    transition: opacity 180ms ease;
+}
+#hud.is-hidden { opacity: 0; }
+
+:root {
+    --c-voice:   #dfe7f1;
+    --c-health:  #ff4d5e;
+    --c-armor:   #c9d3e0;
+    --c-hunger:  #f2b544;
+    --c-thirst:  #35c6e8;
+    --c-stress:  #a86bf0;
+    --c-stamina: #7ad63a;
+}
+
+#info {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.brand {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 2px;
+    border-radius: 11px;
+    background: #06080b;
+    border: 1px solid rgba(198, 214, 233, 0.28);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+.brand img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 9px;
+    border-radius: 7px;
+    background: rgba(10, 12, 16, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 12px;
+    font-weight: 700;
+    color: #e8eef6;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+.pill__key {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #8b96a6;
+}
+
+.pill__icon {
+    display: flex;
+    align-items: center;
+    color: #8b96a6;
+}
+.pill__icon svg { width: 13px; height: 13px; }
+
+.pill--cash .pill__value { color: #7ad63a; }
+.pill--cash .pill__icon { color: rgba(122, 214, 58, 0.75); }
+.pill--bank .pill__value { color: #35c6e8; }
+.pill--bank .pill__icon { color: rgba(53, 198, 232, 0.75); }
+
+.pill--job { font-weight: 600; }
+.pill--job .pill__sub { color: #8b96a6; font-weight: 600; }
+.pill--job.is-off .pill__value { color: #a9b4c2; }
+
+#chips {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.chip {
+    width: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: var(--c-voice);
+}
+
+.chip__icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(10, 12, 16, 0.72);
+    border: 2px solid currentColor;
+    box-shadow: 0 0 12px -4px currentColor, 0 3px 10px rgba(0, 0, 0, 0.4);
+    transition: border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+}
+.chip__icon svg { width: 19px; height: 19px; stroke-width: 1.9; }
+
+.chip__value {
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    color: currentColor;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+
+.chip--voice   { color: var(--c-voice); }
+.chip--health  { color: var(--c-health); }
+.chip--armor   { color: var(--c-armor); }
+.chip--hunger  { color: var(--c-hunger); }
+.chip--thirst  { color: var(--c-thirst); }
+.chip--stress  { color: var(--c-stress); }
+.chip--stamina { color: var(--c-stamina); }
+
+.chip--voice .chip__value { font-size: 8.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+.chip--voice.is-talking .chip__icon { animation: chip-talk 900ms ease-in-out infinite; }
+@keyframes chip-talk {
+    0%, 100% { box-shadow: 0 0 12px -4px currentColor, 0 3px 10px rgba(0, 0, 0, 0.4); }
+    50%      { box-shadow: 0 0 18px 0 currentColor, 0 3px 10px rgba(0, 0, 0, 0.4); }
+}
+
+.chip.is-low { color: #ff3b4f; }
+.chip.is-low .chip__icon { animation: chip-low 1000ms ease-in-out infinite; }
+@keyframes chip-low {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.45; }
+}
+
+.hide-needs #chipHunger,
+.hide-needs #chipThirst { display: none; }
+.hide-stamina #chipStamina { display: none; }
+.hide-speed #vehicle .speed { display: none; }
+.hide-fuel #vehicle .meter:first-of-type { display: none; }
+
+#vehicle {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+#vehicle.is-hidden { display: none; }
+
+.speed {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    padding: 3px 10px 4px;
+    border-radius: 8px;
+    background: rgba(10, 12, 16, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+.speed__value {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: #f2f7ff;
+}
+.speed__unit {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8b96a6;
+}
+.speed__gear {
+    margin-left: 4px;
+    padding: 1px 6px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 11px;
+    font-weight: 800;
+    color: #35c6e8;
+}
+
+.meters {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 9px;
+    border-radius: 8px;
+    background: rgba(10, 12, 16, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    width: 148px;
+}
+.meter { display: flex; align-items: center; gap: 6px; }
+.meter__icon { display: flex; color: #8b96a6; }
+.meter__icon svg { width: 12px; height: 12px; }
+.meter__track {
+    flex: 1;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+.meter__fill {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    transition: width 240ms ease, background 240ms ease;
+}
+.meter__fill--fuel   { background: linear-gradient(90deg, #46d39a, #79e7bd); }
+.meter__fill--fuel.is-warn { background: linear-gradient(90deg, #e59a3c, #f7bd6b); }
+.meter__fill--engine { background: linear-gradient(90deg, #4f8fe8, #7fb6ff); }
+.meter__fill--engine.is-warn { background: linear-gradient(90deg, #e59a3c, #f7bd6b); }
+.meter__fill--engine.is-critical { background: linear-gradient(90deg, #d8455a, #ff6b7f); }
+.meter__value {
+    width: 26px;
+    text-align: right;
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #8b96a6;
+    font-variant-numeric: tabular-nums;
+}
+
+.vchips { display: flex; gap: 5px; }
+.vchip {
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: rgba(10, 12, 16, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8b96a6;
+}
+.vchip.is-on   { color: #46d39a; border-color: rgba(70, 211, 154, 0.3); }
+.vchip.is-off  { color: #ef5b6b; border-color: rgba(239, 91, 107, 0.3); }
+.vchip.is-warn { color: #f2b544; border-color: rgba(242, 181, 68, 0.3); }
+
+@media (min-aspect-ratio: 21/9) {
+    #chips  { left: 3vw; }
+    #vehicle, #info { right: 3vw; }
+}

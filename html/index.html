@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOVARA CITY — HUD</title>
+    <link rel="stylesheet" href="nx.css" />
+    <link rel="stylesheet" href="hud.css" />
+</head>
+<body>
+    <div id="hud" class="is-hidden">
+        <div id="info">
+            <div class="brand"><img src="assets/logo-mark.png" alt="NOVARA" /></div>
+
+            <div class="pill">
+                <span class="pill__key">ID</span>
+                <span class="pill__value" id="charId">—</span>
+                <span class="pill__icon" data-icon="user"></span>
+            </div>
+
+            <div class="pill">
+                <span class="pill__value" id="clock">00:00</span>
+                <span class="pill__icon" data-icon="clock"></span>
+            </div>
+
+            <div class="pill pill--cash">
+                <span class="pill__value" id="cashValue">$0</span>
+                <span class="pill__icon" data-icon="wallet"></span>
+            </div>
+
+            <div class="pill pill--bank">
+                <span class="pill__value" id="bankValue">$0</span>
+                <span class="pill__icon" data-icon="wallet"></span>
+            </div>
+
+            <div class="pill pill--job">
+                <span class="pill__value" id="jobName">Civilian</span>
+                <span class="pill__sub" id="jobGrade"></span>
+                <span class="pill__icon" data-icon="briefcase"></span>
+            </div>
+        </div>
+
+        <div id="chips">
+            <div class="chip chip--voice" id="voice">
+                <span class="chip__icon" data-icon="mic"></span>
+                <span class="chip__value" id="voiceMode">Normal</span>
+            </div>
+
+            <div class="chip chip--health" id="chipHealth">
+                <span class="chip__icon" data-icon="heart"></span>
+                <span class="chip__value" id="healthValue">100%</span>
+            </div>
+
+            <div class="chip chip--armor" id="chipArmor">
+                <span class="chip__icon" data-icon="shield"></span>
+                <span class="chip__value" id="armorValue">0%</span>
+            </div>
+
+            <div class="chip chip--hunger" id="chipHunger">
+                <span class="chip__icon" data-icon="food"></span>
+                <span class="chip__value" id="hungerValue">100%</span>
+            </div>
+
+            <div class="chip chip--thirst" id="chipThirst">
+                <span class="chip__icon" data-icon="drink"></span>
+                <span class="chip__value" id="thirstValue">100%</span>
+            </div>
+
+            <div class="chip chip--stress" id="chipStress">
+                <span class="chip__icon" data-icon="brain"></span>
+                <span class="chip__value" id="stressValue">0%</span>
+            </div>
+
+            <div class="chip chip--stamina" id="chipStamina">
+                <span class="chip__icon" data-icon="run"></span>
+                <span class="chip__value" id="staminaValue">100%</span>
+            </div>
+        </div>
+
+        <div id="vehicle" class="is-hidden">
+            <div class="speed">
+                <span class="speed__value" id="speedValue">0</span>
+                <span class="speed__unit">km/j</span>
+                <span class="speed__gear" id="gearValue">N</span>
+            </div>
+
+            <div class="meters">
+                <div class="meter">
+                    <span class="meter__icon" data-icon="fuel"></span>
+                    <span class="meter__track"><span class="meter__fill meter__fill--fuel" id="fuelBar"></span></span>
+                    <span class="meter__value" id="fuelValue">0%</span>
+                </div>
+                <div class="meter">
+                    <span class="meter__icon" data-icon="gauge"></span>
+                    <span class="meter__track"><span class="meter__fill meter__fill--engine" id="engineBar"></span></span>
+                    <span class="meter__value" id="engineValue">0%</span>
+                </div>
+            </div>
+
+            <div class="vchips">
+                <span class="vchip" id="seatbeltChip">Sabuk</span>
+                <span class="vchip" id="engineChip">Mesin</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="nx.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
