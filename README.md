@@ -26,5 +26,5 @@
 
 - Platform: FiveM / GTA V
 - HUD Version: 1.2.0
-- Framework: NOVARA CITY NX framework
+- Framework: QB-CORE framework
 - Dependencies: `nx_shared`, `nx_core`
